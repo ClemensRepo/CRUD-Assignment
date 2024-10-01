@@ -22,3 +22,20 @@ function renderList () {
         display.append(liElement);
     }
 }
+
+function addBook (newTitle, newAuthor, newIsbn) {
+    let newBook = {
+        "title": newTitle,
+        "author": newAuthor,
+        "isbn": newIsbn    
+    }
+    books.push(newBook);
+}
+
+function editBook (books, isbn, newTitle, newAuthor) {
+
+}
+
+function deleteBook (books, isbn) {
+    
+}
