@@ -18,7 +18,7 @@ function renderList () {
     display.innerHTML = "";
     for (let b of books) {
         let liElement = document.createElement("li");
-        liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} <input type="checkbox" class="checkbox"/><button id="edit">Edit</button><button id="delete">Delete</button>`;
+        liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Availability: <input type="radio" class="avail" name="avail" value="true"/><label>Yes</label><input type="radio" class="avail" name="avail" value="false"/><label>No</label><button class="editBook">Edit</button><button class="deleteBook">Delete</button>`;
         display.append(liElement);
     }
 }
@@ -32,10 +32,23 @@ function addBook (newTitle, newAuthor, newIsbn) {
     books.push(newBook);
 }
 
-function editBook (books, isbn, newTitle, newAuthor) {
+function editBook (bookList, isbn, newTitle, newAuthor) {
+    let index = bookList.findIndex((b) => {
+        return b.id = isbn
+    })
+    if (index) {
+        bookList[index] = {
+            "title": newTitle,
+            "author":newAuthor,
+            "id": isbn
 
+        }
+    }
 }
 
-function deleteBook (books, isbn) {
-    
+function deleteBook (bookList, isbn) {
+    let index = bookList.findIndex((b) => {
+        return b.id == isbn
+    })
+    bookList.splice(index, 1);
 }
