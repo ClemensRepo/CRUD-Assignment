@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         display.innerHTML = "";
         for (let b of books) {
             let liElement = document.createElement("li");
-            liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Availability: <input type="radio" class="avail" name="avail" value="true"/><label>Yes</label><input type="radio" class="avail" name="avail" value="false"/><label>No</label><button class="editBook" id="editBook">Edit</button><button class="deleteBook" id="deleteBook">Delete</button>`;
+            liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Availability: <input type="radio" class="avail" name="avail" value="true"/><label>Yes</label><input type="radio" class="avail" name="avail" value="false"/><label>No</label><button class="editBook" id="editBook" style="margin: 5px;">Edit</button><button class="deleteBook" id="deleteBook" style="margin: 5px;">Delete</button>`;
             display.append(liElement);
 
             document.querySelector("#editBook").addEventListener("click", () => {
