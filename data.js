@@ -1,5 +1,5 @@
-let BIN_ID = "";
-let BIN_API_URL = "";
+let BIN_ID = "66fe4a0be41b4d34e43c2f4d ";
+let BIN_API_URL = "https://api.jsonbin.io/v3";
 
 async function loadData() {
     let response = await axios.get(`${BASE_API_URL}/b/${BIN_ID}/latest`);
