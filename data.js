@@ -1,15 +1,18 @@
-let BIN_ID = "66fe4a0be41b4d34e43c2f4d ";
-let BIN_API_URL = "https://api.jsonbin.io/v3";
+let BIN_ID = "66fe4a0be41b4d34e43c2f4d";
+let BASE_API_URL = "https://api.jsonbin.io/v3";
 
 async function loadData() {
     let response = await axios.get(`${BASE_API_URL}/b/${BIN_ID}/latest`);
+    console.log("response.data.record", response.data.record);
     return response.data.record;
 }
 
 
 async function saveData(books) {
-    let response = await axios.put(`${BASE_API_URL}/b/${BIN_ID}`, tasks);
+    let response = await axios.put(`${BASE_API_URL}/b/${BIN_ID}`, books);
+    console.log("response.data", response.data.record);
     return response.data;
+}
 
 function addBook (newTitle, newAuthor, newIsbn) {
     let newBook = {
