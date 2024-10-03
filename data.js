@@ -1,27 +1,15 @@
-let books = [{
-    "title": "Three little pigs",
-    "author": "Disney",
-    "isbn": 1
-},
-{
-    "title": "Harry Potter",
-    "author": "JK Rowling",
-    "isbn": 2
-},
-{
-    "title": "Snow White and Seven Dwarfs",
-    "author": "Evil Witch",
-    "isbn": 3
-}]
+let BIN_ID = "";
+let BIN_API_URL = "";
 
-function renderList () {
-    display.innerHTML = "";
-    for (let b of books) {
-        let liElement = document.createElement("li");
-        liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Availability: <input type="radio" class="avail" name="avail" value="true"/><label>Yes</label><input type="radio" class="avail" name="avail" value="false"/><label>No</label><button class="editBook">Edit</button><button class="deleteBook">Delete</button>`;
-        display.append(liElement);
-    }
+async function loadData() {
+    let response = await axios.get(`${BASE_API_URL}/b/${BIN_ID}/latest`);
+    return response.data.record;
 }
+
+
+async function saveData(books) {
+    let response = await axios.put(`${BASE_API_URL}/b/${BIN_ID}`, tasks);
+    return response.data;
 
 function addBook (newTitle, newAuthor, newIsbn) {
     let newBook = {
@@ -41,7 +29,6 @@ function editBook (bookList, isbn, newTitle, newAuthor) {
             "title": newTitle,
             "author":newAuthor,
             "id": isbn
-
         }
     }
 }
@@ -51,4 +38,12 @@ function deleteBook (bookList, isbn) {
         return b.id == isbn
     })
     bookList.splice(index, 1);
+}
+
+function updateAvailability(bookList, isbn) {
+    let index = bookList.findIndex((b) => {
+        return b.id == isbn
+    });
+
+    bookList[index].avail = !bookList[index].avail;
 }
