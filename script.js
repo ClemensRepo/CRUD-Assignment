@@ -11,28 +11,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Availability: <input type="radio" class="avail" name="avail" value="true"/><label>Yes</label><input type="radio" class="avail" name="avail" value="false"/><label>No</label><button class="editBook" id="editBook" style="margin: 5px;">Edit</button><button class="deleteBook" id="deleteBook" style="margin: 5px;">Delete</button>`;
             display.append(liElement);
 
-           /* document.querySelector("#editBook").addEventListener("click", () => {
-                let isbn = prompt("Enter the ISBN of the book you want to edit");
-                let newTitle = prompt("Enter the title of book");
-                let newAuthor = prompt("Enter the name of author");
-        
-                editBook(books, isbn, newTitle, newAuthor);
-                renderList();
-            })
-        
-            document.querySelector("#deleteBook").addEventListener("click", () => {
-                let toDelete = confirm("Do you really want to delete a book?");
-
-                if(toDelete) {
-                    let isbn = prompt("Enter the ISBN of the book to delete");
-        
-                    deleteBook(books, isbn);
-                    renderList();
-                }
-
-            }) */
-        
-
+           
             let radioButton = liElement.querySelector(".avail");
             radioButton.checked = b.avail;
             radioButton.addEventListener("click", function () {
@@ -57,8 +36,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         let newTitle = document.querySelector("#title").value;
         let newAuthor = document.querySelector("#author").value;
         let newIsbn = document.querySelector("#isbn").value;
+        let availability = document.querySelector(".avail:checked").value;
 
-        addBook(newTitle, newAuthor, newIsbn);
+        addBook(newTitle, newAuthor, newIsbn, availability);
         renderList();
     })
 

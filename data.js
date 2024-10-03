@@ -14,16 +14,17 @@ async function saveData(books) {
     return response.data;
 }
 
-function addBook (newTitle, newAuthor, newIsbn) {
+function addBook (newTitle, newAuthor, newIsbn, availability) {
     let newBook = {
         "title": newTitle,
         "author": newAuthor,
-        "isbn": newIsbn    
+        "isbn": newIsbn,
+        "availability": availability   
     }
     books.push(newBook);
 }
 
-function editBook (bookList, isbn, newTitle, newAuthor) {
+function editBook (bookList, isbn, newTitle, newAuthor, availability) {
     let index = bookList.findIndex((b) => {
         return b.id = isbn
     })
@@ -31,7 +32,8 @@ function editBook (bookList, isbn, newTitle, newAuthor) {
         bookList[index] = {
             "title": newTitle,
             "author":newAuthor,
-            "id": isbn
+            "id": isbn,
+            "availability": availability 
         }
     }
 }
