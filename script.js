@@ -6,54 +6,45 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     function renderList() {
         display.innerHTML = "";
-        console.log("loaded dada:",books);
+        console.log("loaded data:", books);
         for (let b of books) {
             let liElement = document.createElement("li");
-            liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Location: ${b.location}<button class="editBook" id="editBook" style="margin: 5px;">Edit</button><button class="deleteBook" id="deleteBook" style="margin: 5px;">Delete</button>`;
+            liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Location: ${b.location}<button class="editBook" style="margin: 5px;">Edit</button><button class="deleteBook" style="margin: 5px;">Delete</button>`;
             
-
+            // Edit event listener
             liElement.querySelector(".editBook").addEventListener("click", () => {
-                let isbn = prompt("Enter the ISBN of the book you want to edit");
-                let newTitle = prompt("Enter the title of book");
-                let newAuthor = prompt("Enter the name of author");
-                let newLocation = prompt("Enter location of book");
-                editBook(books, isbn, newTitle, newAuthor, newLocation);
+                let newTitle = prompt("Enter the new title of the book", b.title);
+                let newAuthor = prompt("Enter the new name of the author", b.author);
+                let newLocation = prompt("Enter the new location of the book", b.location);
+                editBook(books, b.isbn, newTitle, newAuthor, newLocation);
                 saveData(books);
-                renderList();
-            })
+                renderList(); // Rerender the updated list
+            });
 
-            liElement.querySelector("#deleteBook").addEventListener("click", () => {
-                let toDelete = confirm("Do you really want to delete a book?");
+            // Delete event listener
+            liElement.querySelector(".deleteBook").addEventListener("click", () => {
+                let toDelete = confirm(`Do you really want to delete the book "${b.title}"?`);
                 if (toDelete) {
-                    deleteBook(books, isbn);
+                    deleteBook(books, b.isbn);
                     saveData(books);
-                    renderList();
+                    renderList(); // Rerender the updated list
                 }
-            })
-            
+            });
 
-            // let radioButton = liElement.querySelector(".avail");
-            // radioButton.checked = b.location;
-            // radioButton.addEventListener("click", function () {
-            //     updateLocation(books, b.id);
-            //     saveData(books);
-            //     renderList();
-            // })
             display.append(liElement);
         }
-
     }
 
     let display = document.querySelector("#display");
     document.querySelector("#viewAllBooks").addEventListener("click", () => {
         renderList();
-    })
+    });
 
     document.querySelector("#clear").addEventListener("click", () => {
         document.querySelector("#title").value = "";
         document.querySelector("#author").value = "";
         document.querySelector("#isbn").value = "";
-    })
+    });
 
     document.querySelector("#addNewBook").addEventListener("click", () => {
         let newTitle = document.querySelector("#title").value;
@@ -63,11 +54,12 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         addBook(books, newTitle, newAuthor, newIsbn, location);
         saveData(books);
-        renderList();
-    })
+        renderList(); // Rerender the updated list
+    });
 
     document.querySelector("#save-btn").addEventListener("click", () => {
         saveData(books);
-    })
+    });
+});
 
-})
+
