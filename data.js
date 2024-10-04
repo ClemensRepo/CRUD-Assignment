@@ -3,18 +3,19 @@ let BASE_API_URL = "https://api.jsonbin.io/v3";
 
 async function loadData() {
     let response = await axios.get(`${BASE_API_URL}/b/${BIN_ID}/latest`);
-    console.log("response.data.record", response.data.record);
+    console.log("response.data", response.data);
     return response.data.record;
 }
 
 
 async function saveData(books) {
+
     let response = await axios.put(`${BASE_API_URL}/b/${BIN_ID}`, books);
     console.log("response.data", response.data.record);
     return response.data;
 }
 
-function addBook (newTitle, newAuthor, newIsbn, availability) {
+function addBook (books, newTitle, newAuthor, newIsbn, availability) {
     let newBook = {
         "title": newTitle,
         "author": newAuthor,
@@ -24,16 +25,16 @@ function addBook (newTitle, newAuthor, newIsbn, availability) {
     books.push(newBook);
 }
 
-function editBook (bookList, isbn, newTitle, newAuthor, availability) {
+function editBook (bookList, isbn, newTitle, newAuthor) {
     let index = bookList.findIndex((b) => {
-        return b.isbn = isbn
+        return b.isbn == isbn
     })
     if (index) {
         bookList[index] = {
             "title": newTitle,
             "author":newAuthor,
-            "id": isbn,
-            "availability": availability 
+            "isbn": isbn,
+            "availability": true 
         }
     }
 }

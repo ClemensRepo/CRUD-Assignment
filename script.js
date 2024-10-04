@@ -17,14 +17,15 @@ window.addEventListener("DOMContentLoaded", async () => {
                 let newAuthor = prompt("Enter the name of author");
         
                 editBook(books, isbn, newTitle, newAuthor);
+                saveData(books);
                 renderList();
             })
         
             liElement.querySelector("#deleteBook").addEventListener("click", () => {
                 let toDelete = confirm("Do you really want to delete a book?");
                 if (toDelete) {
-                    let isbn = prompt("Enter the ISBN of the book to delete");
                     deleteBook(books, isbn);
+                    saveData(books);
                     renderList();
                 }
             })
@@ -34,6 +35,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             radioButton.checked = b.availability;
             radioButton.addEventListener("click", function () {
                 updateAvailability(books, b.id);
+                saveData(books);
                 renderList();
             })
         }
@@ -54,13 +56,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         let newTitle = document.querySelector("#title").value;
         let newAuthor = document.querySelector("#author").value;
         let newIsbn = document.querySelector("#isbn").value;
-        let availability = document.querySelector(".avail:checked").value;
+        // let availability = document.querySelector(".avail:checked").value;
 
-        addBook(newTitle, newAuthor, newIsbn, availability);
+        addBook(books,newTitle, newAuthor, newIsbn, true);
+        saveData(books);
         renderList();
     })
 
-    document.querySelector("#save-btn").addEventListener("click", (books) => {
+    document.querySelector("#save-btn").addEventListener("click", ( ) => {
         saveData(books);
     })
 
