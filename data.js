@@ -1,9 +1,9 @@
-let BIN_ID = "66fe4a0be41b4d34e43c2f4d";
+let BIN_ID = "66ffa612acd3cb34a890f476";
 let BASE_API_URL = "https://api.jsonbin.io/v3";
 
 async function loadData() {
     let response = await axios.get(`${BASE_API_URL}/b/${BIN_ID}/latest`);
-    console.log("response.data", response.data);
+    console.log("loadData(): response.data.record: ", response.data.record);
     return response.data.record;
 }
 
@@ -15,17 +15,17 @@ async function saveData(books) {
     return response.data;
 }
 
-function addBook (books, newTitle, newAuthor, newIsbn, availability) {
+function addBook (books, newTitle, newAuthor, newIsbn, newLocation) {
     let newBook = {
         "title": newTitle,
         "author": newAuthor,
         "isbn": newIsbn,
-        "availability": availability   
+        "location": newLocation   
     }
     books.push(newBook);
 }
 
-function editBook (bookList, isbn, newTitle, newAuthor) {
+function editBook (bookList, isbn, newTitle, newAuthor, newLocation) {
     let index = bookList.findIndex((b) => {
         return b.isbn == isbn
     })
@@ -34,7 +34,7 @@ function editBook (bookList, isbn, newTitle, newAuthor) {
             "title": newTitle,
             "author":newAuthor,
             "isbn": isbn,
-            "availability": true 
+            "location": newLocation 
         }
     }
 }

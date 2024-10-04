@@ -6,21 +6,22 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     function renderList() {
         display.innerHTML = "";
+        console.log("loaded dada:",books);
         for (let b of books) {
             let liElement = document.createElement("li");
-            liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Availability: <input type="radio" class="avail" name="avail" value="true"/><label>Yes</label><input type="radio" class="avail" name="avail" value="false"/><label>No</label><button class="editBook" id="editBook" style="margin: 5px;">Edit</button><button class="deleteBook" id="deleteBook" style="margin: 5px;">Delete</button>`;
-            display.append(liElement);
+            liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Location: ${b.location}<button class="editBook" id="editBook" style="margin: 5px;">Edit</button><button class="deleteBook" id="deleteBook" style="margin: 5px;">Delete</button>`;
+            
 
             liElement.querySelector(".editBook").addEventListener("click", () => {
                 let isbn = prompt("Enter the ISBN of the book you want to edit");
                 let newTitle = prompt("Enter the title of book");
                 let newAuthor = prompt("Enter the name of author");
-        
-                editBook(books, isbn, newTitle, newAuthor);
+                let newLocation = prompt("Enter location of book");
+                editBook(books, isbn, newTitle, newAuthor, newLocation);
                 saveData(books);
                 renderList();
             })
-        
+
             liElement.querySelector("#deleteBook").addEventListener("click", () => {
                 let toDelete = confirm("Do you really want to delete a book?");
                 if (toDelete) {
@@ -29,16 +30,18 @@ window.addEventListener("DOMContentLoaded", async () => {
                     renderList();
                 }
             })
+            
 
-
-            let radioButton = liElement.querySelector(".avail");
-            radioButton.checked = b.availability;
-            radioButton.addEventListener("click", function () {
-                updateAvailability(books, b.id);
-                saveData(books);
-                renderList();
-            })
+            // let radioButton = liElement.querySelector(".avail");
+            // radioButton.checked = b.location;
+            // radioButton.addEventListener("click", function () {
+            //     updateLocation(books, b.id);
+            //     saveData(books);
+            //     renderList();
+            // })
+            display.append(liElement);
         }
+
     }
 
     let display = document.querySelector("#display");
@@ -56,14 +59,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         let newTitle = document.querySelector("#title").value;
         let newAuthor = document.querySelector("#author").value;
         let newIsbn = document.querySelector("#isbn").value;
-        // let availability = document.querySelector(".avail:checked").value;
+        let location = document.querySelector(".location:checked").value;
 
-        addBook(books,newTitle, newAuthor, newIsbn, true);
+        addBook(books, newTitle, newAuthor, newIsbn, location);
         saveData(books);
         renderList();
     })
 
-    document.querySelector("#save-btn").addEventListener("click", ( ) => {
+    document.querySelector("#save-btn").addEventListener("click", () => {
         saveData(books);
     })
 
