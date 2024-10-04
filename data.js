@@ -26,7 +26,7 @@ function addBook (newTitle, newAuthor, newIsbn, availability) {
 
 function editBook (bookList, isbn, newTitle, newAuthor, availability) {
     let index = bookList.findIndex((b) => {
-        return b.id = isbn
+        return b.isbn = isbn
     })
     if (index) {
         bookList[index] = {
@@ -40,14 +40,14 @@ function editBook (bookList, isbn, newTitle, newAuthor, availability) {
 
 function deleteBook (bookList, isbn) {
     let index = bookList.findIndex((b) => {
-        return b.id == isbn
+        return b.isbn == isbn
     })
     bookList.splice(index, 1);
 }
 
 function updateAvailability(bookList, isbn) {
     let index = bookList.findIndex((b) => {
-        return b.id == isbn
+        return b.isbn == isbn
     });
 
     bookList[index].avail = !bookList[index].avail;
