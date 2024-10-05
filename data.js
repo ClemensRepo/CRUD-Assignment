@@ -29,7 +29,7 @@ function editBook (bookList, isbn, newTitle, newAuthor, newLocation) {
     let index = bookList.findIndex((b) => {
         return b.isbn == isbn
     })
-    if (index) {
+    if (index !== -1) {
         bookList[index] = {
             "title": newTitle,
             "author":newAuthor,
@@ -43,7 +43,9 @@ function deleteBook (bookList, isbn) {
     let index = bookList.findIndex((b) => {
         return b.isbn == isbn
     })
+    if (index !== -1) {
     bookList.splice(index, 1);
+    }
 }
 
 function updateAvailability(bookList, isbn) {
