@@ -11,7 +11,6 @@ async function loadData() {
 async function saveData(books) {
 
     let response = await axios.put(`${BASE_API_URL}/b/${BIN_ID}`, books);
-    console.log("response.data", response.data.record);
     return response.data;
 }
 
@@ -48,10 +47,3 @@ function deleteBook (bookList, isbn) {
     }
 }
 
-function updateAvailability(bookList, isbn) {
-    let index = bookList.findIndex((b) => {
-        return b.isbn == isbn
-    });
-
-    bookList[index].avail = !bookList[index].avail;
-}
