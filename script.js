@@ -12,24 +12,24 @@ window.addEventListener("DOMContentLoaded", async () => {
             liElement.innerHTML = `Book Title: ${b.title}  Author: ${b.author}  ISBN: ${b.isbn} Location: ${b.location}
             <button class="editBook" style="margin: 5px;">Edit</button>
             <button class="deleteBook" style="margin: 5px;">Delete</button>`;
-            
-            
+
+
             liElement.querySelector(".editBook").addEventListener("click", () => {
                 let newTitle = prompt("Enter the new title of the book", b.title);
                 let newAuthor = prompt("Enter the new name of the author", b.author);
                 let newLocation = prompt("Enter the new location of the book", b.location);
                 editBook(books, b.isbn, newTitle, newAuthor, newLocation);
                 saveData(books);
-                renderList(); 
+                renderList();
             });
 
-            
+
             liElement.querySelector(".deleteBook").addEventListener("click", () => {
                 let toDelete = confirm(`Do you really want to delete the book "${b.title}"?`);
                 if (toDelete) {
                     deleteBook(books, b.isbn);
                     saveData(books);
-                    renderList(); 
+                    renderList();
                 }
             });
 
@@ -56,7 +56,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         addBook(books, newTitle, newAuthor, newIsbn, location);
         saveData(books);
-        renderList(); 
+        renderList();
     });
 
     document.querySelector("#save-btn").addEventListener("click", () => {

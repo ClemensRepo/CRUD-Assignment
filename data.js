@@ -14,36 +14,36 @@ async function saveData(books) {
     return response.data;
 }
 
-function addBook (books, newTitle, newAuthor, newIsbn, newLocation) {
+function addBook(books, newTitle, newAuthor, newIsbn, newLocation) {
     let newBook = {
         "title": newTitle,
         "author": newAuthor,
         "isbn": newIsbn,
-        "location": newLocation   
+        "location": newLocation
     }
     books.push(newBook);
 }
 
-function editBook (bookList, isbn, newTitle, newAuthor, newLocation) {
+function editBook(bookList, isbn, newTitle, newAuthor, newLocation) {
     let index = bookList.findIndex((b) => {
         return b.isbn == isbn
     })
     if (index !== -1) {
         bookList[index] = {
             "title": newTitle,
-            "author":newAuthor,
+            "author": newAuthor,
             "isbn": isbn,
-            "location": newLocation 
+            "location": newLocation
         }
     }
 }
 
-function deleteBook (bookList, isbn) {
+function deleteBook(bookList, isbn) {
     let index = bookList.findIndex((b) => {
         return b.isbn == isbn
     })
-    if (index !== -1) {
-    bookList.splice(index, 1);
+    if (index !== -1 || index >= 0) {
+        bookList.splice(index, 1);
     }
 }
 
